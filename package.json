@@ -1,0 +1,25 @@
+{
+  "name": "proshop_mern_stack",
+  "version": "1.0.0",
+  "description": "Mern Shopping Cart",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norrico31/MERN-ProShop.git"
+  },
+  "author": "Norrico Gerald M. Biason",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/norrico31/MERN-ProShop/issues"
+  },
+  "homepage": "https://github.com/norrico31/MERN-ProShop#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
