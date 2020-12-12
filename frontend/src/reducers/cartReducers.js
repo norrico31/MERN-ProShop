@@ -1,15 +1,14 @@
 import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants'
 
-export const cartReducers = (state = { cartItems: [] }, action) => {
-    const { type, payload } = action
+export const cartReducers = (state = { cartItems: [] }, { type, payload }) => {
     switch (type) {
         case CART_ADD_ITEM:
             const item = payload
-            const existItem = state.cartItems.find(x => x.product === item.product)
+            const existItem = state.cartItems.find(prevItem => prevItem.product === item.product)
             if (existItem) {
                 return {
                     ...state,
-                    cartItems: state.cartItems.map(cartItem => cartItem.product === existItem.product ? item : cartItem)
+                    cartItems: state.cartItems.map(prevItem => prevItem.product === existItem.product ? item : prevItem)
                 }
             } else {
                 return {
