@@ -1,5 +1,6 @@
 import AsyncHandler from 'express-async-handler'
 import User from '../models/userModel.js'
+import { generateToken } from '../utils/generateToken.js'
 
 // @desc     Auth user & get token
 // @route    POST /api/users/login
@@ -13,7 +14,7 @@ const authUser = AsyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             isAdmine: user.isAdmin,
-            token: null
+            token: generateToken(user._id)
         })
     } else {
         res.status(401)
