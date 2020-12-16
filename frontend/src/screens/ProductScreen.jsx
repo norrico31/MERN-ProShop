@@ -11,9 +11,11 @@ const ProductScreen = ({ match, history }) => {
     const [qty, setQty] = useState(1)
     const dispatch = useDispatch()
     const {product, loading, error} = useSelector(({productDetails}) => productDetails)
+    
     useEffect(() => {
         dispatch(listProductDetails(match.params.id))
     }, [dispatch, match])
+
     const addToCartHandler = () => {
         history.push(`/cart/${match.params.id}?qty=${qty}`)
     }
