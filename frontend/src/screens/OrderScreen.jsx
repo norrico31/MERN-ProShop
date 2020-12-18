@@ -17,7 +17,7 @@ const OrderScreen = ({ match: { params } }) => {
     
     useEffect(() => {
         if (!order || order._id !== params.id) dispatch(getOrderDetails(params.id))
-    }, [dispatch, params])
+    }, [dispatch, params, order])
 
     return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
         <>
