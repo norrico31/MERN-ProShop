@@ -53,7 +53,7 @@ export const login = (email, password) => async dispatch => {
     }
 }
 
-export const getUserDetails = (id) => async (dispatch, getState) => {
+export const getUserDetails = id => async (dispatch, getState) => {
     const { userLogin: { userInfo }} = getState()
     try {
         dispatch({
