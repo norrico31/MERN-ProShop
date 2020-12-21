@@ -55,7 +55,7 @@ const registerUser = AsyncHandler(async (req, res) => {
 
 // @desc     GET user profile
 // @route    GET /api/users/profile
-// @access   Private
+// @access   Private / Protected
 const getUserProfile = AsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
     if (user) {
@@ -73,7 +73,7 @@ const getUserProfile = AsyncHandler(async (req, res) => {
 
 // @desc     UPDATE user profile
 // @route    PUT /api/users/profile
-// @access   Private
+// @access   Private / Protected
 const updateUserProfile = AsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
     if (user) {
