@@ -76,12 +76,11 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
 }
 
 export const myListOrders = () => async (dispatch, getState) => {
-    const { userLogin: { userInfo }} = getState()
     try {
         dispatch({
             type: MY_ORDER_LIST_REQUEST
         })
-        const { data } = await axios.get(`/api/orders/myorders`, { headers: { Authorization: `Bearer ${userInfo.token}` }})
+        const { data } = await axios.get(`/api/orders/myorders`, { headers: { Authorization: `Bearer ${getState().userInfo.token}` }})
         dispatch({
             type: MY_ORDER_LIST_SUCCESS,
             payload: data 
