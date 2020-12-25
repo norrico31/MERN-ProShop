@@ -42,7 +42,7 @@ const UserList = ({ history }) => {
                                 <td><Link to={`mailto:${user.email}`}>{user.email}</Link></td>
                                 <td>{user.isAdmin ? (<i className='fas fa-check' style={{ color: 'green' }}/>) : <i className='fas fa-times' style={{ color: 'red' }} />}</td>
                                 <td>
-                                    <LinkContainer to={`/user/${user._id}/edit`}>
+                                    <LinkContainer to={`/admin/user/${user._id}/edit`}>
                                         <Button variant='light' className='btn-sm'>
                                             <i className='fas fa-edit'/>
                                         </Button>
