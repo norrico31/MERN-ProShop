@@ -1,4 +1,4 @@
-import { ADMIN_USER_DELETE_FAIL, ADMIN_USER_DELETE_REQUEST, ADMIN_USER_DELETE_SUCCESS, ADMIN_USER_LIST_FAIL, ADMIN_USER_LIST_REQUEST, ADMIN_USER_LIST_RESET, ADMIN_USER_LIST_SUCCESS, USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_RESET, USER_DETAILS_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from '../constants/userConstants'
+import { ADMIN_USER_DELETE_FAIL, ADMIN_USER_DELETE_REQUEST, ADMIN_USER_DELETE_SUCCESS, ADMIN_USER_LIST_FAIL, ADMIN_USER_LIST_REQUEST, ADMIN_USER_LIST_RESET, ADMIN_USER_LIST_SUCCESS, ADMIN_USER_UPDATE_FAIL, ADMIN_USER_UPDATE_REQUEST, ADMIN_USER_UPDATE_RESET, ADMIN_USER_UPDATE_SUCCESS, USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_RESET, USER_DETAILS_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, {type, payload}) => {
     switch (type) {
@@ -125,6 +125,21 @@ export const userDeleteReducer = (state = {}, {type, payload}) => {
                 loading: false,
                 error: payload
             }
+        default:
+            return state
+    }
+}
+
+export const userUpdateReducer = (state = { user: {} }, {type, payload}) => {
+    switch (type) {
+        case ADMIN_USER_UPDATE_REQUEST:
+            return { loading: true }
+        case ADMIN_USER_UPDATE_SUCCESS:
+            return { loading: false, success: true }
+        case ADMIN_USER_UPDATE_FAIL:
+            return { loading: false, error: payload }
+        case ADMIN_USER_UPDATE_RESET:
+            return { user: {} }
         default:
             return state
     }
