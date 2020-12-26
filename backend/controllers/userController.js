@@ -73,7 +73,7 @@ const getUserProfile = AsyncHandler(async (req, res) => {
 
 // @desc     UPDATE user profile
 // @route    PUT /api/users/profile
-// @access   Private / Protected
+// @access   Private / Protected / Admin
 const updateUserProfile = AsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
     if (user) {
@@ -133,7 +133,7 @@ const getUserIdByAdmin = AsyncHandler(async (req, res) => {
 
 // @desc     UPDATE user by admin
 // @route    PUT /api/users/:id
-// @access   Private / Protected
+// @access   Private / Protected / Admin
 const updateUserByAdmin = AsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id)
     if (user) {

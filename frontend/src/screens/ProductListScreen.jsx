@@ -2,13 +2,14 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, Col } from 'react-bootstrap'
-import { listProducts } from '../actions/productActions'
+import { listProducts, deleteProduct } from '../actions/productActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 
 const ProductListScreen = ({ match, history }) => {
     const { loading, products, error } = useSelector(state => state.productList)
     const { userInfo } = useSelector(({userLogin}) => userLogin)
+    const { loading: loadingDelete, success: successDelete, error: errorDelete } = useSelector(({productDelete}) => productDelete) 
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -17,14 +18,14 @@ const ProductListScreen = ({ match, history }) => {
         } else {
             history.push('/login')
         }
-    }, [dispatch, userInfo, history])
+    }, [dispatch, userInfo, history, successDelete])
 
     const onCreateProductHandler = product => {
 
     }
     const onDeleteHandler = productId => {
         if (window.confirm('Are you sure?')) {
-            // Delete Product
+            dispatch(deleteProduct(productId))
         }
     }
     return (
@@ -37,6 +38,8 @@ const ProductListScreen = ({ match, history }) => {
                     <Button className="my-3" onClick={onCreateProductHandler}><i className="fas fa-plus" /> Create Product</Button>
                 </Col>
             </Row>
+            {loadingDelete && <Loader />}
+            {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
             {loading ? (<Loader />) : error ? (<Message variant="danger">{error}</Message>) : (
                 <Table striped bordered hover responsive className="table-sm">
                     <thead>
@@ -61,7 +64,7 @@ const ProductListScreen = ({ match, history }) => {
                                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
                                         <Button variant='light' className="btn-sm"><i className="fas fa-edit" /></Button>
                                     </LinkContainer>
-                                    <Button variant='danger' className='btn-sm' onClick={onDeleteHandler}><i className="fas fa-trash"/></Button>
+                                    <Button variant='danger' className='btn-sm' onClick={() => onDeleteHandler(product._id)}><i className="fas fa-trash"/></Button>
                                 </td>
                             </tr>
                         ))}
