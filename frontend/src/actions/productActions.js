@@ -1,4 +1,4 @@
-import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_CREATE_FAIL } from '../constants/productConstants'
+import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_CREATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAIL } from '../constants/productConstants'
 import axios from 'axios'
 
 export const listProducts = () => async dispatch => {
@@ -67,6 +67,31 @@ export const createProduct = () => async (dispatch, getState) => {
     } catch (err) {
         dispatch({ 
             type: PRODUCT_CREATE_FAIL,
+            payload: err.response && err.response.data.message ? err.response.data.message : err.message
+        })
+    }
+}
+
+export const updateProduct = (product) => async (dispatch, getState) => {
+    const { userLogin: { userInfo: { token } }} = getState()
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    }
+    try {
+        dispatch({ 
+            type: PRODUCT_UPDATE_REQUEST 
+        })
+        const { data } = await axios.put(`/api/products/${product._id}`, product, config)
+        dispatch({ 
+            type: PRODUCT_UPDATE_SUCCESS, 
+            payload: data 
+        })
+    } catch (err) {
+        dispatch({ 
+            type: PRODUCT_UPDATE_FAIL,
             payload: err.response && err.response.data.message ? err.response.data.message : err.message
         })
     }
