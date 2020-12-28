@@ -9,9 +9,10 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { ORDER_PAY_RESET } from '../constants/orderConstants'
 
-const OrderScreen = ({ match: { params } }) => {
+const OrderScreen = ({ match: { params }, history }) => {
     const [sdkReady, setSdkReady] = useState(false)
     const dispatch = useDispatch()
+    const { userInfo } = useSelector(state => state.userLogin)
     const { loading, order, error } = useSelector(({orderDetails}) => orderDetails)
     const { success: successPay, loading: loadingPay } =  useSelector(state => state.orderPay)
     
@@ -19,6 +20,10 @@ const OrderScreen = ({ match: { params } }) => {
         const addDecimals = num => (Math.round(num * 100) / 100).toFixed(2)
         order.itemsPrice = addDecimals(order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0))
     }
+
+    useEffect(() => {
+        if (!userInfo) return history.push('/login')
+    }, [userInfo, history])
     
     useEffect(() => {
         const addPaypalScript = async () => {
