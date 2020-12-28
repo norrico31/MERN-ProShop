@@ -4,10 +4,11 @@ import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails, updateProduct } from '../actions/productActions'
 import {getUsersListByAdmin} from '../actions/userActions'
+import axios from 'axios'
 import FormContainer from '../components/FormContainer'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { PRODUCT_UPDATE_RESET} from '../constants/productConstants'
+import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 
 const ProductEditScreen = ({ match, history }) => {
     const productId = match.params.id
@@ -18,6 +19,7 @@ const ProductEditScreen = ({ match, history }) => {
     const [brand, setBrand] = useState('')
     const [category, setCategory] = useState('')
     const [countInStock, setCountInStock] = useState(0)
+    const [uploading, setUploading] = useState(false)
     const dispatch = useDispatch()
     const { userInfo } = useSelector(state => state.userLogin)
     const { loading: loadingUpdate, success: successUpdate, error: errorUpdate } = useSelector(state => state.productUpdate)
@@ -60,6 +62,26 @@ const ProductEditScreen = ({ match, history }) => {
             countInStock
         }))
     }
+    const onUploadFileHandler = async e => {
+        const file = e.target.files[0]
+        const formData = new FormData()
+        formData.append('image', file)
+        setUploading(true)
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+            const { data } = await axios.post('/api/upload', formData, config)
+            setImage(data)
+            setUploading(false)
+        } catch (error) { 
+            console.error(error)
+            setUploading(false)
+        }
+    }
     return (
         <>
             <Link to='/admin/productlist' className='btn btn-light my-3'>Go Back</Link>
@@ -82,7 +104,9 @@ const ProductEditScreen = ({ match, history }) => {
                             <Form.Control type="text" placeholder="Enter Brand" value={brand} onChange={e => setBrand(e.target.value)} />
                         </Form.Group>
                         <Form.Group controlId='image'>
-                            <Form.Check type="text" value={image} onChange={e => setImage(e.target.checked)} />
+                            <Form.Control type="text" placeholder="Enter image url" value={image} onChange={e => setImage(e.target.checked)} />
+                            <Form.File id="image-file" label="Choose File" custom onChange={onUploadFileHandler}></Form.File>
+                            {uploading && <Loader />}
                         </Form.Group>
                         <Form.Group controlId='countInStock'>
                             <Form.Label>Count In Stock</Form.Label>
