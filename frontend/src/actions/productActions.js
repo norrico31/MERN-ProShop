@@ -72,7 +72,7 @@ export const createProduct = () => async (dispatch, getState) => {
     }
 }
 
-export const updateProduct = (product) => async (dispatch, getState) => {
+export const updateProduct = product => async (dispatch, getState) => {
     const { userLogin: { userInfo: { token } }} = getState()
     const config = {
         headers: {
