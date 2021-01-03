@@ -20,6 +20,7 @@ const ProductEditScreen = ({ match, history }) => {
     const { loading, error, product } = useSelector(({productDetails}) => productDetails)
     
     useEffect(() => {
+        console.log(useState)
         if (!product.name || product._id !== productId) {
             dispatch(listProductDetails(productId))
         } else {
@@ -57,7 +58,7 @@ const ProductEditScreen = ({ match, history }) => {
                             <Form.Control type="text" placeholder="Enter Brand" value={brand} onChange={e => setBrand(e.target.value)} />
                         </Form.Group>
                         <Form.Group controlId='image'>
-                            <Form.Check type="text" value={image} onChange={e => setImage(e.target.checked)} />
+                            <Form.Check type="text" placeholder="Enter image url" value={image} onChange={e => setImage(e.target.checked)} />
                         </Form.Group>
                         <Form.Group controlId='countInStock'>
                             <Form.Label>Count In Stock</Form.Label>
