@@ -80,8 +80,8 @@ export const productUpdateReducer = (state = { product: {} }, action) => {
         case PRODUCT_UPDATE_SUCCESS:
             return { 
                 loading: false, 
-                success: true, product: 
-                action.payload 
+                success: true, 
+                product: action.payload 
             }
         case PRODUCT_UPDATE_FAIL:
             return { 
