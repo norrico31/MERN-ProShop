@@ -114,7 +114,7 @@ export const adminListOrder = () => async (dispatch, getState) => {
 }
 
 
-export const deliverOrder = (order) => async (dispatch, getState) => {
+export const deliverOrder = order => async (dispatch, getState) => {
     const { userLogin: { userInfo }} = getState()
     try {
         dispatch({
