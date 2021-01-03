@@ -76,7 +76,8 @@ export const productUpdateReducer = (state = { product: {} }, action) => {
     switch (action.type) {
         case PRODUCT_UPDATE_REQUEST:
             return { 
-                loading: true }
+                loading: true 
+            }
         case PRODUCT_UPDATE_SUCCESS:
             return { 
                 loading: false, 
