@@ -20,6 +20,7 @@ const ProductEditScreen = ({ match, history }) => {
     const [category, setCategory] = useState('')
     const [countInStock, setCountInStock] = useState(0)
     const [uploading, setUploading] = useState(false)
+    
     const dispatch = useDispatch()
     const { userInfo } = useSelector(state => state.userLogin)
     const { loading: loadingUpdate, success: successUpdate, error: errorUpdate } = useSelector(state => state.productUpdate)

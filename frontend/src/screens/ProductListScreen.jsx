@@ -8,11 +8,11 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 
 const ProductListScreen = ({ match, history }) => {
+    const dispatch = useDispatch()
     const { loading, products, error } = useSelector(state => state.productList)
     const { userInfo } = useSelector(({userLogin}) => userLogin)
     const { loading: loadingDelete, success: successDelete, error: errorDelete } = useSelector(({productDelete}) => productDelete)
     const { loading: loadingCreate, success: successCreate, error: errorCreate, product: createdProduct } = useSelector(({productCreate}) => productCreate)
-    const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch({ type: PRODUCT_CREATE_RESET })

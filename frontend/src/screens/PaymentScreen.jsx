@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
@@ -6,11 +6,14 @@ import { savePaymentMethod } from '../actions/cartActions'
 import CheckoutSteps from '../components/CheckoutSteps'
 
 const PaymentScreen = ({ history }) => {
-    const { shippingAddress } = useSelector(state => state.cart)
-    const dispatch = useDispatch()
     const [paymentMethod, setPaymentMethod] = useState('Paypal')
 
-    if (!shippingAddress) history.push('/shipping')
+    const dispatch = useDispatch()
+    const { shippingAddress } = useSelector(state => state.cart)
+
+    useEffect(() => {
+        if (!shippingAddress) history.push('/shipping')
+    }, [history, shippingAddress])
 
     const onSubmitHandler = e => {
         e.preventDefault()

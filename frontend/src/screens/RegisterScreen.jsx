@@ -8,14 +8,16 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 
 const RegisterScreen = ({ location, history }) => {
+    const { loading, error, userInfo } = useSelector(({userRegister}) => userRegister)
+    const dispatch = useDispatch()
+    
+    const redirect = location.search ? location.search.split('=')[1] : '/'
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
-    const redirect = location.search ? location.search.split('=')[1] : '/'
-    const dispatch = useDispatch()
-    const { loading, error, userInfo } = useSelector(({userRegister}) => userRegister)
+    
     
     useEffect(() => {
         if (userInfo) history.push(redirect)

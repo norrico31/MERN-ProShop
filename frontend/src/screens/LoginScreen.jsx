@@ -8,11 +8,13 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 
 const LoginScreen = ({ location, history }) => {
+    const redirect = location.search ? location.search.split('=')[1] : '/'
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const redirect = location.search ? location.search.split('=')[1] : '/'
+
     const dispatch = useDispatch()
     const { loading, error, userInfo } = useSelector(({userLogin}) => userLogin)
+    
     useEffect(() => {
         if (userInfo) history.push(redirect)
     }, [userInfo, history, redirect])

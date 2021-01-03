@@ -7,17 +7,18 @@ import { myListOrders } from '../actions/orderActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 
-const ProfileScreen = ({ location, history }) => {
+const ProfileScreen = ({ history }) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
-    const dispatch = useDispatch()
+
     const { loading, error, user } = useSelector(({userDetails}) => userDetails)
     const { userInfo } = useSelector(({userLogin}) => userLogin)
     const { success } = useSelector(state => state.userUpdateProfile)
     const { loading: loadingOrders, orders, error: errorOrders } = useSelector(({myOrderList}) => myOrderList)
+    const dispatch = useDispatch()
     
     useEffect(() => {
         if (!userInfo) history.push('/login')

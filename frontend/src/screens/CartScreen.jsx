@@ -9,6 +9,7 @@ import Message from '../components/Message'
 const CartScreen = ({ match: { params }, location, history }) => {
     const productId = params.id
     const qty = location.search ? Number(location.search.split('=')[1]) : 1
+    
     const dispatch = useDispatch()
     const { cartItems } = useSelector(({cart}) => cart)
 
