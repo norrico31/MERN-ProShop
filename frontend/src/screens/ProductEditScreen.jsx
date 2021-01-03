@@ -82,7 +82,7 @@ const ProductEditScreen = ({ match, history }) => {
                             <Form.Control type="text" placeholder="Enter Brand" value={brand} onChange={e => setBrand(e.target.value)} />
                         </Form.Group>
                         <Form.Group controlId='image'>
-                            <Form.Check type="text" value={image} onChange={e => setImage(e.target.checked)} />
+                            <Form.Check type="text" placeholder="Enter Count in stock" value={image} onChange={e => setImage(e.target.checked)} />
                         </Form.Group>
                         <Form.Group controlId='countInStock'>
                             <Form.Label>Count In Stock</Form.Label>
