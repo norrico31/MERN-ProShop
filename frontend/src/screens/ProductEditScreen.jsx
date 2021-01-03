@@ -20,7 +20,6 @@ const ProductEditScreen = ({ match, history }) => {
     const { loading, error, product } = useSelector(({productDetails}) => productDetails)
     
     useEffect(() => {
-        console.log(useState)
         if (!product.name || product._id !== productId) {
             dispatch(listProductDetails(productId))
         } else {
