@@ -7,6 +7,7 @@ import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+import Meta from '../components/Meta'
 
 const ProductScreen = ({ match, history }) => {
     const [qty, setQty] = useState(1)
@@ -42,6 +43,7 @@ const ProductScreen = ({ match, history }) => {
             <Link to="/" className="btn btn-light my-3">Go Back</Link>
             {loading ? (<Loader />) : error ? (<Message variant="danger">{error}</Message>) : (
                 <>
+                    <Meta title={product.name} />
                     <Row>
                         <Col md={6}>
                             <Image src={product.image} alt={product.name} fluid />
