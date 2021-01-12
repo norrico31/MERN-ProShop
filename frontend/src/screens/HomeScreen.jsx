@@ -12,8 +12,7 @@ const HomeScreen = ({ match }) => {
     const keyword = match.params.keyword // query string
     const pageNumber = match.params.pageNumber || 1
     const dispatch = useDispatch()
-    const productList = useSelector(state => state.productList)
-    const { loading, error, products, page, pages } = productList
+    const { loading, error, products } = useSelector(state => state.productList)
 
     useEffect(() => {
         dispatch(listProducts(keyword, pageNumber))
